@@ -268,13 +268,10 @@
     }
 
     .hero-eyebrow {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 14px;
       margin-bottom: 40px;
-      max-width: 100%;
-      flex-wrap: wrap;
     }
     .hero-eyebrow-text {
       font-size: 0.68rem;
@@ -283,8 +280,6 @@
       color: var(--accent);
       border-left: none;
       padding-left: 0;
-      word-break: break-word;
-      overflow-wrap: break-word;
     }
 
     /* Title lockup */
@@ -822,6 +817,7 @@
 
       .hero-title { font-size: clamp(3rem, 10vw, 4rem); }
       .hero-geo { display: none; }
+      .hero-eyebrow { display: flex; justify-content: center; max-width: 100%; flex-wrap: wrap; }
 
       .what-cards { grid-template-columns: 1fr; }
 
