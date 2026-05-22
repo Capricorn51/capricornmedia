@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capricorn Media — Built Under Your Name. Invisible by Design.</title>
+  <meta name="description" content="Capricorn Media creates custom-built digital products — courses, ebooks, and templates — for creators and influencers ready to help their audience take the next step. Built under your name. Completely invisible.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:            #09090b;
+      --bg-2:          #0d0d0f;
+      --bg-3:          #131315;
+      --bg-4:          #1a1a1d;
+      --text:          #e0dbd2;
+      --text-sec:      #a09890;
+      --text-muted:    #5e5a55;
+      --accent:        #c4a45a;
+      --accent-lt:     #d4b870;
+      --accent-dim:    rgba(196,164,90,0.10);
+      --accent-dim2:   rgba(196,164,90,0.18);
+      --border:        rgba(255,255,255,0.055);
+      --border-strong: rgba(255,255,255,0.10);
+      --border-accent: rgba(196,164,90,0.28);
+      --red:           rgba(180,60,50,0.85);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      line-height: 1.72;
+      overflow-x: hidden;
+    }
+
+    /* ---------- TYPOGRAPHY ---------- */
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+    }
+
+    em { font-style: italic; }
+
+    /* ---------- CONTAINER ---------- */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 36px;
+    }
+
+    /* ---------- SCROLL REVEAL ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- SECTION LABEL ---------- */
+    .section-label {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-left: 14px;
+      border-left: 2px solid var(--accent);
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+    /* ---------- SECTION TITLE ---------- */
+    .section-title {
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+    .section-title em { color: var(--accent); }
+
+
+
+    /* ========================================
+       NAVIGATION
+    ======================================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 26px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: padding 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+      background: rgba(9,9,11,0.60);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    nav.scrolled {
+      padding: 16px 36px;
+      background: rgba(9,9,11,0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-sec);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      color: var(--accent) !important;
+      border: 1px solid var(--border-accent);
+      padding: 9px 22px;
+      border-radius: 2px;
+      transition: background 0.25s, color 0.25s !important;
+    }
+    .nav-cta:hover {
+      background: var(--accent-dim2) !important;
+      color: var(--accent-lt) !important;
+    }
+
+    /* Hamburger */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px 0;
+      background: none;
+      border: none;
+    }
+    .nav-burger span {
+      display: block;
+      width: 26px;
+      height: 1px;
+      background: var(--text);
+      transition: all 0.3s;
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Mobile overlay nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 199;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 44px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--accent); }
+
+
+    /* ========================================
+       HERO
+    ======================================== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Concentric circle decoration */
+    .hero-geo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 560px;
+      height: 560px;
+      pointer-events: none;
+    }
+    .hero-geo-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+    }
+    .hero-geo-ring:nth-child(1) {
+      inset: 0;
+      border-color: rgba(196,164,90,0.038);
+    }
+    .hero-geo-ring:nth-child(2) {
+      inset: 70px;
+      border-color: rgba(196,164,90,0.028);
+    }
+    .hero-geo-ring:nth-child(3) {
+      inset: 140px;
+      border-color: rgba(196,164,90,0.02);
+    }
+    .hero-geo-ring:nth-child(4) {
+      inset: 210px;
+      border-color: rgba(196,164,90,0.015);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding-top: 80px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .hero-eyebrow-text {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-left: none;
+      padding-left: 0;
+    }
+
+    /* Title lockup */
+    .hero-lockup {
+      display: inline-block;
+      position: relative;
+      margin-bottom: 52px;
+      text-align: center;
+    }
+    .hero-lockup-bracket {
+      position: absolute;
+      width: 55%;
+      height: 2px;
+      background: var(--accent);
+      opacity: 1;
+    }
+    .hero-lockup-bracket.top    { top: -16px;    left: 0; }
+    .hero-lockup-bracket.bottom { bottom: -16px; right: 0; }
+    .hero-lockup-word {
+      display: block;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(3.6rem, 7.5vw, 6.2rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .hero-lockup-word.w1 { color: var(--text); }
+    .hero-lockup-word.w2 { color: var(--accent); }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 36px auto 52px;
+      text-align: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 16px 44px;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--border-accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .btn-primary:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+
+
+    /* ========================================
+       WHAT WE DO
+    ======================================== */
+    #what-we-do {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 120px 0;
+    }
+
+    .what-header {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 72px;
+    }
+    .what-header p {
+      color: var(--text-sec);
+      font-size: 1rem;
+      line-height: 1.85;
+      text-align: left;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .what-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .what-card {
+      background: var(--bg-2);
+      padding: 52px 40px 56px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s ease;
+    }
+    .what-card:hover { background: var(--bg-3); }
+
+    .what-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--accent);
+      transition: height 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .what-card:hover::after { height: 100%; }
+
+    .card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.8rem;
+      font-weight: 300;
+      color: rgba(196,164,90,0.38);
+      line-height: 1;
+      margin-bottom: 28px;
+      letter-spacing: -0.03em;
+      user-select: none;
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+    .card-body {
+      color: var(--text-sec);
+      font-size: 0.9rem;
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+
+    /* ========================================
+       HOW IT WORKS
+    ======================================== */
+    #how-it-works {
+      background: var(--bg);
+      padding: 100px 0;
+    }
+
+    .how-header {
+      text-align: center;
+      max-width: 540px;
+      margin: 0 auto 60px;
+    }
+    .how-header p {
+      color: var(--text-sec);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+
+    .steps-wrap {
+      position: relative;
+    }
+
+    /* horizontal connector line */
+    .steps-line {
+      position: absolute;
+      top: 27px;
+      left: calc(12.5% + 28px);
+      right: calc(12.5% + 28px);
+      height: 1px;
+      background: var(--border-strong);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .step {
+      text-align: center;
+      padding: 0 28px;
+    }
+
+    .step-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 1px solid var(--border-accent);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--accent);
+      position: relative;
+      z-index: 1;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .step:hover .step-circle {
+      background: var(--accent-dim2);
+      border-color: var(--accent);
+    }
+
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .step-body {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.85;
+    }
+
+
+    /* ========================================
+       WHO WE WORK WITH
+    ======================================== */
+    #who-we-work-with {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 0;
+    }
+
+    .who-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .who-body {
+      color: var(--text-sec);
+      font-size: 1.05rem;
+      line-height: 1.9;
+      margin-bottom: 52px;
+      text-align: left;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .tag {
+      padding: 10px 26px;
+      border: 1px solid var(--border-strong);
+      color: var(--text-sec);
+      font-size: 0.74rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+      cursor: default;
+    }
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+
+    /* ========================================
+       PARTNER FORM
+    ======================================== */
+    #partner-form {
+      background: var(--bg);
+      padding: 120px 0 140px;
+    }
+
+    .form-header {
+      max-width: 580px;
+      margin-bottom: 64px;
+    }
+    .form-header p {
+      color: var(--text-sec);
+      font-size: 0.98rem;
+      line-height: 1.85;
+      margin-top: 4px;
+    }
+
+    .intake-form {
+      max-width: 700px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 28px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    input,
+    select,
+    textarea {
+      background: var(--bg-3);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      padding: 14px 18px;
+      border-radius: 2px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s, background 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    select {
+      padding-right: 42px;
+      cursor: pointer;
+    }
+    .select-wrap {
+      position: relative;
+    }
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 11px;
+      height: 7px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%23c4a45a' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+    select option {
+      background: var(--bg-3);
+      color: var(--text);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(196,164,90,0.5);
+      background: var(--bg-4);
+    }
+
+    input.error, select.error, textarea.error {
+      border-color: var(--red);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 130px;
+      line-height: 1.72;
+    }
+
+    .form-footer-row {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn-submit {
+      padding: 17px 50px;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--border-accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .btn-submit:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .form-note {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .form-helper {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    /* Confirmation */
+    .form-confirmation {
+      display: none;
+      padding: 12px 0 0;
+    }
+    .form-confirmation.show {
+      display: block;
+      animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .confirm-icon {
+      width: 58px;
+      height: 58px;
+      border: 1px solid var(--border-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      color: var(--accent);
+    }
+    .confirm-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--accent);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .confirm-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .confirm-body {
+      color: var(--text-sec);
+      font-size: 0.95rem;
+      line-height: 1.9;
+      max-width: 500px;
+    }
+
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+    footer {
+      padding: 44px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .footer-copy {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .footer-sep {
+      width: 32px;
+      height: 1px;
+      background: var(--border-strong);
+      margin: 18px auto 16px;
+    }
+    .footer-contact {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      line-height: 1.9;
+    }
+    .footer-contact a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--text-sec); }
+
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    @media (max-width: 840px) {
+      nav { padding: 20px 20px; }
+      nav.scrolled { padding: 14px 20px; }
+
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+
+      .container { padding: 0 22px; }
+
+      #what-we-do, #how-it-works, #who-we-work-with, #partner-form { padding: 88px 0; }
+
+      .hero-title { font-size: clamp(3rem, 10vw, 4rem); }
+      .hero-geo { display: none; }
+
+      .what-cards { grid-template-columns: 1fr; }
+
+      .steps { grid-template-columns: 1fr 1fr; gap: 48px 24px; }
+      .steps-line { display: none; }
+
+      .form-grid { grid-template-columns: 1fr; gap: 18px; }
+      .form-group.full { grid-column: 1; }
+    }
+
+    @media (max-width: 520px) {
+      .steps { grid-template-columns: 1fr; gap: 40px; }
+      .hero-title { font-size: 2.8rem; }
+      .form-footer-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .btn-submit { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== NAV ==================== -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">Capricorn <span>Media</span></a>
+    <ul class="nav-links">
+      <li><a href="#what-we-do">What We Do</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#who-we-work-with">Partners</a></li>
+      <li><a href="#why-this-exists">Our Story</a></li>
+      <li><a href="#partner-form" class="nav-cta">Become a Partner</a></li>
+    </ul>
+    <button class="nav-burger" id="navBurger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile nav overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#what-we-do"      onclick="closeMobileNav()">What We Do</a>
+    <a href="#how-it-works"    onclick="closeMobileNav()">How It Works</a>
+    <a href="#who-we-work-with"  onclick="closeMobileNav()">Partners</a>
+    <a href="#why-this-exists"   onclick="closeMobileNav()">Our Story</a>
+    <a href="#partner-form"      onclick="closeMobileNav()">Become a Partner</a>
+  </div>
+
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero">
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="hero-geo" aria-hidden="true">
+      <div class="hero-geo-ring"></div>
+      <div class="hero-geo-ring"></div>
+      <div class="hero-geo-ring"></div>
+      <div class="hero-geo-ring"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+
+        <div class="hero-eyebrow reveal">
+          <span class="hero-eyebrow-text">The silent partner behind the brand</span>
+        </div>
+
+        <div class="hero-lockup reveal" role="heading" aria-level="1">
+          <div class="hero-lockup-bracket top" aria-hidden="true"></div>
+          <span class="hero-lockup-word w1">CAPRICORN</span>
+          <span class="hero-lockup-word w2">MEDIA</span>
+          <div class="hero-lockup-bracket bottom" aria-hidden="true"></div>
+        </div>
+
+        <p class="hero-tagline reveal">
+          You worked hard to build an audience that trusts you<br>
+          We build digital products worthy of that trust
+        </p>
+
+        <a href="#partner-form" class="btn-primary reveal">Become a Partner</a>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ==================== WHAT WE DO ==================== -->
+  <section id="what-we-do">
+    <div class="container">
+
+      <div class="what-header reveal">
+        <div class="section-label">The Model</div>
+        <h2 class="section-title">Three things — One partnership</h2>
+        <p>There is a simpler way to bring a digital product to market. You do not need to build it yourself or manage every moving part. You need the right process — and a team that executes it.</p>
+      </div>
+
+      <div class="what-cards">
+        <div class="what-card reveal">
+          <div class="card-num">01</div>
+          <h3 class="card-title">We Build</h3>
+          <p class="card-body">We handle everything from concept to final delivery — online courses, ebooks, membership programmes, and template packs. You set the direction. We do the work.</p>
+        </div>
+
+        <div class="what-card reveal" style="transition-delay:0.12s">
+          <div class="card-num">02</div>
+          <h3 class="card-title">You Launch</h3>
+          <p class="card-body">You bring the audience, the trust, and the platform. You take the product to your followers under your name, on your terms. Revenue is shared — you earn from every launch, and so does Capricorn Media. Your brand carries the product. This partnership amplifies what you have already built.</p>
+        </div>
+
+        <div class="what-card reveal" style="transition-delay:0.24s">
+          <div class="card-num">03</div>
+          <h3 class="card-title">Nobody Knows</h3>
+          <p class="card-body">We operate entirely behind the scenes. No watermarks. No credits. No trails. Capricorn Media remains invisible to your audience, your customers, and your competitors. What happens in the arrangement stays in the arrangement. Discretion is the product.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================== HOW IT WORKS ==================== -->
+  <section id="how-it-works">
+    <div class="container">
+
+      <div class="how-header reveal">
+        <div class="section-label">The Process</div>
+        <h2 class="section-title">From introduction<br>to <em>in market</em></h2>
+        <p>We move efficiently. Every engagement follows the same four-stage process — designed to protect your time, honour your brand, and get the product live without friction.</p>
+      </div>
+
+      <div class="steps-wrap">
+        <div class="steps-line" aria-hidden="true"></div>
+        <div class="steps">
+
+          <div class="step reveal">
+            <div class="step-circle">1</div>
+            <h3 class="step-title">Partner</h3>
+            <p class="step-body">Submit your application. We review your platform, audience size, niche, and product vision to determine whether there is a strong fit. We are selective — every partnership needs to work for both sides.</p>
+          </div>
+
+          <div class="step reveal" style="transition-delay:0.12s">
+            <div class="step-circle">2</div>
+            <h3 class="step-title">Discover</h3>
+            <p class="step-body">We research your audience's pain points, buying behaviour, and the product opportunity available. A product brief is prepared and agreed before anything is built.</p>
+          </div>
+
+          <div class="step reveal" style="transition-delay:0.24s">
+            <div class="step-circle">3</div>
+            <h3 class="step-title">Create</h3>
+            <p class="step-body">We build the product end to end — structure, content, design, and delivery assets. You review at key milestones and approve the final product before it goes to market.</p>
+          </div>
+
+          <div class="step reveal" style="transition-delay:0.36s">
+            <div class="step-circle">4</div>
+            <h3 class="step-title">Launch</h3>
+            <p class="step-body">You take the product to market under your brand through your existing channels. We provide launch support and remain behind the scenes.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================== WHO WE WORK WITH ==================== -->
+  <section id="who-we-work-with">
+    <div class="container">
+      <div class="who-inner">
+
+        <div class="reveal">
+          <div class="section-label">Selectivity</div>
+          <h2 class="section-title">We don't work with everyone</h2>
+        </div>
+
+        <p class="who-body reveal">
+          We work with operators who already have audiences, reach, and the credibility to place a product in front of people who trust them. If you have built a platform, a following, or a reputation in your space, you already have the most valuable asset in the equation. We provide the rest.
+        </p>
+
+        <div class="tags reveal">
+          <div class="tag">Influencers</div>
+          <div class="tag">Content Creators</div>
+          <div class="tag">Course Promoters</div>
+          <div class="tag">Brand Builders</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== WHY THIS EXISTS ==================== -->
+  <section id="why-this-exists" style="background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 0;">
+    <div class="container">
+      <div style="max-width:680px;margin:0 auto;text-align:center;">
+
+        <div class="reveal">
+          <div class="section-label">Our Story</div>
+          <h2 class="section-title">Founded on an Observation</h2>
+        </div>
+
+        <p class="reveal" style="color:var(--text-sec);font-size:1.05rem;line-height:1.9;margin-bottom:28px;">
+          Capricorn Media was founded by Marianne Reiner on a simple observation: creators with audiences rarely have the time, skill, or infrastructure to build something worthy of the trust those audiences have placed in them.
+        </p>
+
+        <p class="reveal" style="color:var(--text-sec);font-size:1.05rem;line-height:1.9;margin-bottom:28px;">
+          The gap between a creator with genuine reach and a product worthy of their audience is larger than it should be. Capricorn Media exists to close that gap — quietly, professionally, and on terms that work for both sides.
+        </p>
+
+        <p class="reveal" style="color:var(--text-sec);font-size:1.05rem;line-height:1.9;margin-bottom:0;">
+          Every partnership is taken seriously. Every product is built with care. And Capricorn Media's name never appears anywhere your audience can see it. That is not a limitation. That is the entire point.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== PARTNER INTAKE FORM ==================== -->
+  <section id="partner-form">
+    <div class="container">
+
+      <div class="form-header reveal">
+        <div class="section-label">Partnership Enquiry</div>
+        <h2 class="section-title">Tell us about<br>your <em>platform</em></h2>
+        <p>If you are serious about launching a digital product under your brand, this is where it starts. Fill in the form below. We read every submission personally.</p>
+      </div>
+
+      <form class="intake-form" id="intakeForm" novalidate>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Your full name" required autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@yourdomain.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="platform">Platform / Channel</label>
+            <input type="text" id="platform" name="platform" placeholder="e.g. YouTube, Instagram, Podcast" required>
+          </div>
+
+          <div class="form-group">
+            <label for="audienceSize">Audience Size</label>
+            <div class="select-wrap">
+              <select id="audienceSize" name="audienceSize" required>
+                <option value="" disabled selected>Select range</option>
+                <option value="under-10k">Under 10k</option>
+                <option value="10k-100k">10k – 100k</option>
+                <option value="100k-500k">100k – 500k</option>
+                <option value="500k+">500k+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="niche">Your Niche or Field</label>
+            <input type="text" id="niche" name="niche" placeholder="e.g. Personal Finance, Fitness, Marketing" required>
+          </div>
+
+          <div class="form-group">
+            <label for="productType">Type of Digital Product in Mind</label>
+            <div class="select-wrap">
+              <select id="productType" name="productType" required>
+                <option value="" disabled selected>Select type</option>
+                <option value="course">Online Course</option>
+                <option value="ebook">Ebook</option>
+                <option value="membership">Membership</option>
+                <option value="templates">Templates</option>
+                <option value="not-sure">Not Sure Yet</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label for="timeline">Project Timeline</label>
+            <div class="select-wrap">
+              <select id="timeline" name="timeline" required>
+                <option value="" disabled selected>Select timeline</option>
+                <option value="asap">ASAP</option>
+                <option value="1-3-months">1 – 3 months</option>
+                <option value="3-6-months">3 – 6 months</option>
+                <option value="exploring">Exploring options</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label for="challenge">Biggest Current Challenge</label>
+            <textarea id="challenge" name="challenge" placeholder="Tell us what's holding you back or what you're trying to achieve" required></textarea>
+          </div>
+
+        </div>
+
+        <div class="form-footer-row">
+          <button type="submit" class="btn-submit" id="submitBtn">Submit Partnership Enquiry</button>
+          <span class="form-note">We review every submission personally.</span>
+        </div>
+      </form>
+
+      <!-- Confirmation state -->
+      <div class="form-confirmation" id="formConfirmation">
+        <div class="confirm-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h3 class="confirm-title">Enquiry received.</h3>
+        <p class="confirm-body">
+          Thank you for reaching out. Your submission has been received and will be reviewed personally. If there is a strong fit, you will hear from us within 3 to 5 business days with a proposed next step. If we do not reach out, it means the timing or fit was not right — but we keep every submission on file. We appreciate the interest and the patience.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">Capricorn Media</div>
+      <p class="footer-copy">&copy; 2026 Capricorn Media. All rights reserved.</p>
+      <div class="footer-sep"></div>
+      <p class="footer-contact">
+        www.capricornmedia.io<br>
+        <a href="mailto:partners@capricornmedia.io">partners@capricornmedia.io</a>
+      </p>
+    </div>
+  </footer>
+
+
+  <script>
+    /* ============================================================
+       NAV — scroll state + mobile toggle
+    ============================================================ */
+    const navbar    = document.getElementById('navbar');
+    const navBurger = document.getElementById('navBurger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    navBurger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      navBurger.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      navBurger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+
+    /* ============================================================
+       SCROLL REVEAL — IntersectionObserver
+    ============================================================ */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Trigger hero reveals on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('#hero .reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), 200 + i * 120);
+      });
+    });
+
+
+    /* ============================================================
+       HERO CANVAS — particle constellation
+    ============================================================ */
+    (function () {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx    = canvas.getContext('2d');
+      let particles = [];
+      let raf;
+
+      function resize() {
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+
+      function init() {
+        particles = [];
+        const count = Math.max(30, Math.floor((canvas.width * canvas.height) / 16000));
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x:  Math.random() * canvas.width,
+            y:  Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.25,
+            vy: (Math.random() - 0.5) * 0.25,
+            r:  Math.random() * 1.2 + 0.4,
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const LINK = 150;
+
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height)  p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(196,164,90,0.22)';
+          ctx.fill();
+        });
+
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx   = particles[i].x - particles[j].x;
+            const dy   = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < LINK) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(196,164,90,${0.055 * (1 - dist / LINK)})`;
+              ctx.lineWidth   = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+
+        raf = requestAnimationFrame(draw);
+      }
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        cancelAnimationFrame(raf);
+        resizeTimer = setTimeout(() => { resize(); init(); draw(); }, 150);
+      });
+
+      resize();
+      init();
+      draw();
+    }());
+
+
+    /* ============================================================
+       INTAKE FORM — validation & confirmation
+    ============================================================ */
+    (function () {
+      const form         = document.getElementById('intakeForm');
+      const confirmation = document.getElementById('formConfirmation');
+      const submitBtn    = document.getElementById('submitBtn');
+
+      function validate(field) {
+        const val = field.value.trim();
+        if (!val) return false;
+        if (field.type === 'email') {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        }
+        return true;
+      }
+
+      function setError(field, hasError) {
+        field.classList.toggle('error', hasError);
+      }
+
+      // Live clear on input
+      form.querySelectorAll('[required]').forEach(f => {
+        f.addEventListener('input',  () => setError(f, false));
+        f.addEventListener('change', () => setError(f, false));
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const fields   = Array.from(form.querySelectorAll('[required]'));
+        let   allValid = true;
+        let   firstBad = null;
+
+        fields.forEach(f => {
+          const ok = validate(f);
+          setError(f, !ok);
+          if (!ok && !firstBad) firstBad = f;
+          if (!ok) allValid = false;
+        });
+
+        if (!allValid) {
+          firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstBad.focus();
+          return;
+        }
+
+        // Disable button while "submitting"
+        submitBtn.disabled   = true;
+        submitBtn.textContent = 'Submitting…';
+
+        // Simulate brief processing delay for feel
+        setTimeout(() => {
+          form.style.transition = 'opacity 0.4s ease';
+          form.style.opacity    = '0';
+          setTimeout(() => {
+            form.style.display = 'none';
+            confirmation.classList.add('show');
+            confirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 400);
+        }, 600);
+      });
+    }());
+  </script>
+
+</body>
+</html>
