@@ -1048,7 +1048,7 @@
       <form class="intake-form" id="intakeForm" method="POST" novalidate>
         <input type="hidden" name="access_key" value="62e3a78b-f3e8-4256-bbf1-a775070a413b">
         <input type="hidden" name="subject" value="New Partnership Enquiry — Capricorn Media">
-        <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
+        <input type="text" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" value="">
         <div class="form-grid">
 
           <div class="form-group">
@@ -1114,7 +1114,7 @@
 
           <div class="form-group full">
             <label for="challenge">Biggest Current Challenge</label>
-            <textarea id="challenge" name="challenge" placeholder="Tell us what's holding you back or what you're trying to achieve" required></textarea>
+            <textarea id="challenge" name="challenge" placeholder="Tell us what's holding you back or what you're trying to achieve"></textarea>
           </div>
 
         </div>
@@ -1137,6 +1137,7 @@
         <p class="confirm-body">
           Thank you for reaching out. Your submission has been received and will be reviewed personally. If there is a strong fit, you will hear from us within 3 to 5 business days with a proposed next step. If we do not reach out, it means the timing or fit was not right — but we keep every submission on file. We appreciate the interest and the patience.
         </p>
+        <button id="resetFormBtn" style="margin-top:24px;background:none;border:none;padding:0;font-size:0.85rem;color:var(--text-ter);cursor:pointer;text-decoration:underline;text-underline-offset:3px;">Submit another enquiry</button>
       </div>
 
     </div>
@@ -1357,6 +1358,16 @@
           submitBtn.textContent = 'Submit Partnership Enquiry';
           errorEl.style.display = 'block';
         }
+      });
+      document.getElementById('resetFormBtn').addEventListener('click', () => {
+        form.reset();
+        form.style.transition = '';
+        form.style.opacity    = '1';
+        form.style.display    = '';
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Submit Partnership Enquiry';
+        confirmation.classList.remove('show');
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }());
   </script>
