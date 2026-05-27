@@ -1045,7 +1045,10 @@
         <p>If you are serious about launching a digital product under your brand, this is where it starts. Fill in the form below. We read every submission personally.</p>
       </div>
 
-      <form class="intake-form" id="intakeForm" novalidate>
+      <form class="intake-form" id="intakeForm" method="POST" novalidate>
+        <input type="hidden" name="access_key" value="62e3a78b-f3e8-4256-bbf1-a775070a413b">
+        <input type="hidden" name="subject" value="New Partnership Enquiry — Capricorn Media">
+        <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
         <div class="form-grid">
 
           <div class="form-group">
@@ -1120,6 +1123,7 @@
           <button type="submit" class="btn-submit" id="submitBtn">Submit Partnership Enquiry</button>
           <span class="form-note">We review every submission personally.</span>
         </div>
+        <p id="formError" style="display:none;margin-top:14px;font-size:0.85rem;color:#c0392b;">Something went wrong. Please try again or email us at <a href="mailto:partners@capricornmedia.io" style="color:inherit;text-decoration:underline;">partners@capricornmedia.io</a>.</p>
       </form>
 
       <!-- Confirmation state -->
@@ -1304,7 +1308,7 @@
         f.addEventListener('change', () => setError(f, false));
       });
 
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const fields   = Array.from(form.querySelectorAll('[required]'));
@@ -1324,20 +1328,35 @@
           return;
         }
 
-        // Disable button while "submitting"
-        submitBtn.disabled   = true;
+        const errorEl = document.getElementById('formError');
+        errorEl.style.display = 'none';
+
+        submitBtn.disabled    = true;
         submitBtn.textContent = 'Submitting…';
 
-        // Simulate brief processing delay for feel
-        setTimeout(() => {
-          form.style.transition = 'opacity 0.4s ease';
-          form.style.opacity    = '0';
-          setTimeout(() => {
-            form.style.display = 'none';
-            confirmation.classList.add('show');
-            confirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 400);
-        }, 600);
+        try {
+          const res  = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body:   new FormData(form)
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            form.style.transition = 'opacity 0.4s ease';
+            form.style.opacity    = '0';
+            setTimeout(() => {
+              form.style.display = 'none';
+              confirmation.classList.add('show');
+              confirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 400);
+          } else {
+            throw new Error(data.message || 'Submission failed');
+          }
+        } catch {
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Submit Partnership Enquiry';
+          errorEl.style.display = 'block';
+        }
       });
     }());
   </script>
